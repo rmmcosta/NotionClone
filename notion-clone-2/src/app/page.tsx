@@ -1,7 +1,8 @@
+import TypewriterTitle from "@/components/ui/TypewriterTitle";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 import { ArrowRight, Link } from "lucide-react";
- 
+
 export default function Home() {
   return (
     <div className="bg-gradient-to-r min-h-screen grainy from-rose-100 to-teal-100">
@@ -12,7 +13,7 @@ export default function Home() {
         </h1>
         <div className="mt-4"></div>
         <h2 className="font-semibold text-3xl text-center text-slate-700">
-          Your notes, organized.
+          <TypewriterTitle />
         </h2>
         <div className="mt-8"></div>
 
