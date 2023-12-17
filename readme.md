@@ -17,3 +17,5 @@ Vercel AI SDK
 4 - npx shadcn-ui@latest add <component> (ex.: button)
 5 - install clerk (https://clerk.com/)
 6 - npm i @clerk/nextjs
+7 - npm i lucide-react
+8 - npm i typewriter-effect
