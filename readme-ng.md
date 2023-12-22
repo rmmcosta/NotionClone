@@ -29,3 +29,7 @@ Steps of creation and libraries instalation:
 1 - npm install -g @angular/cli (if not installed yet)
 
 2 - ng new notion-clone (cd notion-clone and ng serve to make sure everything is working)
+
+3 - npm install typed.js
+
+4 - 
