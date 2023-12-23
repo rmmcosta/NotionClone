@@ -1,8 +1,14 @@
 import React from "react";
 import "./App.css";
 import TypewriterTitle from "./components/TypewriterTitle";
+import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
+import { ArrowRight } from "@mui/icons-material";
+import { pink } from "@mui/material/colors";
 
 function App() {
+  const getStartedColor = pink["A200"];
+
   return (
     <div className="bg-gradient-to-r min-h-screen grainy from-rose-100 to-teal-100">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -15,6 +21,17 @@ function App() {
           <TypewriterTitle />
         </h2>
         <div className="mt-8"></div>
+        <div className="flex justify-center">
+          <Link href="/dashboard">
+            <Button
+              variant="contained"
+              style={{ backgroundColor: getStartedColor, color: "white" }}
+              startIcon={<ArrowRight />}
+            >
+              Get Started
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

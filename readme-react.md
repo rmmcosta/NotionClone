@@ -34,9 +34,7 @@ Steps of creation and libraries instalation:
 
 5 - install and configure tailwind.css
 
-6 - npx shadcn-ui@latest init
-
-7 - npx shadcn-ui@latest add <component> (ex.: button)
+6 - install material ui (npm install @mui/material @emotion/react @emotion/styled)
 
 8 - install clerk (https://clerk.com/)
 
