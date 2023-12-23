@@ -32,10 +32,12 @@ Steps of creation and libraries instalation:
 
 4 - npm i lucide-react
 
-5 - npx shadcn-ui@latest init
+5 - install and configure tailwind.css
 
-6 - npx shadcn-ui@latest add <component> (ex.: button)
+6 - npx shadcn-ui@latest init
 
-7 - install clerk (https://clerk.com/)
+7 - npx shadcn-ui@latest add <component> (ex.: button)
 
-8 - npm install @clerk/clerk-react
+8 - install clerk (https://clerk.com/)
+
+9 - npm install @clerk/clerk-react
