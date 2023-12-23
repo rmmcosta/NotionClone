@@ -32,4 +32,4 @@ Steps of creation and libraries instalation:
 
 3 - npm install typed.js
 
-4 - 
+4 - install tailwind css (https://tailwindcss.com/docs/guides/angular)
