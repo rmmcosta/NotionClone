@@ -11,19 +11,19 @@ export default function DashboardPage() {
     new Note(
       "1",
       "Note 1",
-      "https://images.unsplash.com/photo-1633518624837-6b2f6f3e3c2f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=164&h=164&fit=crop&auto=format",
       new Date()
     ),
     new Note(
       "2",
       "Note 2",
-      "https://images.unsplash.com/photo-1633518624837-6b2f6f3e3c2f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?w=164&h=164&fit=crop&auto=format",
       new Date()
     ),
     new Note(
       "3",
       "Note 3",
-      "https://images.unsplash.com/photo-1633518624837-6b2f6f3e3c2f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0Mnx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80",
+      "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=164&h=164&fit=crop&auto=format",
       new Date()
     ),
   ];
