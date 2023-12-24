@@ -1,33 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import { ClerkProvider } from '@clerk/clerk-react'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-// Import your publishable key
-const PUBLISHABLE_KEY = process.env.REACT_APP_PUBLIC_CLERK_PUBLISHABLE_KEY
- 
-if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
-}
+// Import the layouts
+import RootLayout from "./layouts/root-layout";
+import DashboardLayout from "./layouts/dashboard-layout";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+// Import the components
+import IndexPage from "./routes";
+import ContactPage from "./routes/contact";
+import SignInPage from "./routes/sign-in";
+import SignUpPage from "./routes/sign-up";
+import DashboardPage from "./routes/dashboard";
+import UserInfoPage from "./routes/user-info";
+
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <IndexPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/sign-in", element: <SignInPage /> },
+      { path: "/sign-up", element: <SignUpPage /> },
+      { path: "/user-info", element: <UserInfoPage /> },
+      {
+        element: <DashboardLayout />,
+        path: "dashboard",
+        children: [{ path: "/dashboard", element: <DashboardPage /> }],
+      },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <App />
-    </ClerkProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
