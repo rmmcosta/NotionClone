@@ -39,3 +39,11 @@ Steps of creation and libraries instalation:
 8 - install clerk (https://clerk.com/)
 
 9 - npm install @clerk/clerk-react
+
+10 - npm i drizzle-orm @neondatabase/serverless
+11 - npm i -D drizzle-kit
+
+(to run migrations: npx drizzle-kit push:pg)
+
+12 - npm i pg
+13 - npx drizzle-kit studio
