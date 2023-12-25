@@ -25,6 +25,12 @@ export default function FormDialog() {
         variant="outlined"
         onClick={handleClickOpen}
         startIcon={<AddIcon />}
+        sx={{
+          border: '1px dashed',
+          '&:hover': {
+            border: '1px dashed',
+          },
+        }}
       >
         New Note Book
       </Button>
