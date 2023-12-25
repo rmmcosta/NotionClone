@@ -1,11 +1,58 @@
-import React from 'react'
+import * as React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import AddIcon from "@mui/icons-material/Add";
 
-type Props = {}
+export default function FormDialog() {
+  const [open, setOpen] = React.useState(false);
 
-const CreateNoteDialog = (props: Props) => {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <div>CreateNoteDialog</div>
-  )
-}
+    <React.Fragment>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        startIcon={<AddIcon />}
+      >
+        New Note Book
+      </Button>
 
-export default CreateNoteDialog
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Create New Note Book</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You can create a new note book by entering the name of the note
+            book.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Note Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" color="success" onClick={handleClose}>
+            Create
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+  );
+}
