@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [noteName, setNoteName] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +18,11 @@ export default function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCreate = () => {
+    setOpen(false);
+    //call the api to create a new note book
   };
 
   return (
@@ -54,11 +60,13 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            value={noteName}
+            onChange={(e) => setNoteName(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" color="success" onClick={handleClose}>
+          <Button variant="contained" color="success" onClick={handleCreate}>
             Create
           </Button>
         </DialogActions>
