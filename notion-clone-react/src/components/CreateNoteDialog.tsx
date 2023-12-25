@@ -27,8 +27,12 @@ export default function FormDialog() {
         startIcon={<AddIcon />}
         sx={{
           border: '1px dashed',
+          color: 'green',
+          fontWeight: 'bold',
           '&:hover': {
             border: '1px dashed',
+            color: 'green',
+            fontWeight: 'bold',
           },
         }}
       >

@@ -1,4 +1,3 @@
-import { UserButton } from "@clerk/clerk-react";
 import { ArrowLeft } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -35,7 +34,17 @@ export default function DashboardPage() {
           <div className="flex justify-between items-center md:flex-row flex-col">
             <div className="flex items-center">
               <Link href="/">
-                <Button className="bg-green-600" size="small">
+                <Button
+                  size="small"
+                  sx={{
+                    color: "green",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      color: "green",
+                      fontWeight: "bold",
+                    },
+                  }}
+                >
                   <ArrowLeft className="mr-1 w-4 h-4" />
                   Back
                 </Button>
