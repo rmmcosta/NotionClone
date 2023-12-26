@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
+import { generateImagePrompt } from "../services/createNoteBook";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -21,8 +22,11 @@ export default function FormDialog() {
   };
 
   const handleCreate = () => {
-    setOpen(false);
     //call the api to create a new note book
+    const imageDescription = generateImagePrompt(noteName);
+    console.log(imageDescription);
+    setNoteName("");
+    setOpen(false);
   };
 
   return (

@@ -39,3 +39,5 @@ Steps of creation and libraries instalation:
 7 - npm i lucide-react
 
 8 - npm i typewriter-effect
+
+9 - npm i openai-edge

@@ -47,3 +47,6 @@ Steps of creation and libraries instalation:
 
 12 - npm i pg
 13 - npx drizzle-kit studio
+
+14 - npm install axios
+15 - npm install --save openai
