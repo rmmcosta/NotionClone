@@ -28,11 +28,15 @@ export async function generateImagePrompt(name: string) {
       const image_description = data.choices[0].message.content;
       return image_description as string;
     } else {
-      return "Unavailable"
+      return "Unavailable";
     }
-  } catch (error) {
-    console.log(error);
-    return "Unavailable"
+  } catch (error: any) {
+    if (error.response && error.response.status === 429) {
+      const retryAfter = error.response.headers["retry-after"];
+      console.log(`Rate limit exceeded. Retry after ${retryAfter} seconds.`);
+    } else {
+      throw error;
+    }
   }
 }
 
