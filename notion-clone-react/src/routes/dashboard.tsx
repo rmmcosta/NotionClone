@@ -6,14 +6,16 @@ import CreateNoteDialog from "../components/CreateNoteDialog";
 import { NoteType } from "../db/schema";
 import { getNotes } from "../services/noteService";
 import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
 
 export default function DashboardPage() {
+  const { userId } = useAuth();
   const [notes, setNotes] = useState<Array<NoteType>>([]);
 
   const fetchNotes = useCallback(async () => {
-    const fetchedNotes = await getNotes();
+    const fetchedNotes = await getNotes(userId?.toString() || "");
     setNotes(fetchedNotes);
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     fetchNotes();
