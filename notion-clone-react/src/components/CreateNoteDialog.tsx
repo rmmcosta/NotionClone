@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   generateImage,
   generateImagePrompt,
@@ -20,6 +21,7 @@ interface FormDialogProps {
 export default function FormDialog({ onNoteCreated }: FormDialogProps) {
   const [open, setOpen] = React.useState(false);
   const [noteName, setNoteName] = React.useState("");
+  const [loading, setLoading] = React.useState(false); // new loading state
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,6 +32,7 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
   };
 
   const handleCreate = async () => {
+    setLoading(true); // start loading
     //call the api to create a new note book
     const imageDescription: string =
       (await generateImagePrompt(noteName)) || "empty slate";
@@ -44,6 +47,7 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
     setNoteName("");
     setOpen(false);
     onNoteCreated();
+    setLoading(false); // end loading
   };
 
   return (
@@ -87,8 +91,9 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" color="success" onClick={handleCreate}>
+          <Button variant="contained" color="success" onClick={handleCreate} disabled={loading}>
             Create
+            {loading && <CircularProgress size={24} />}
           </Button>
         </DialogActions>
       </Dialog>
