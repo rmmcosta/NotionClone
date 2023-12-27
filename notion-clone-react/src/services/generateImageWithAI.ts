@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export async function generateImagePrompt(name: string) {
+export async function generateImagePrompt(name: string): Promise<string> {
   try {
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -23,20 +23,20 @@ export async function generateImagePrompt(name: string) {
       ],
     });
     const data = await response.json();
-    if (data.status === 200) {
+    console.log(data);
+    if (data.choices.length > 0) {
       console.log(data);
       const image_description = data.choices[0].message.content;
       return image_description as string;
     } else {
-      return "Unavailable";
+      return "empty placeholder image";
     }
   } catch (error: any) {
     if (error.response && error.response.status === 429) {
       const retryAfter = error.response.headers["retry-after"];
       console.log(`Rate limit exceeded. Retry after ${retryAfter} seconds.`);
-    } else {
-      throw error;
     }
+    return "empty placeholder image";
   }
 }
 

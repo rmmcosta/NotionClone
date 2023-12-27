@@ -9,7 +9,7 @@ export default defineConfig({
   schema: "./db/schema.ts",
   driver: "pg",
   dbCredentials: {
-    connectionString: process.env.REACT_APP_NOTIONCLONE_DB_URL!,
+    connectionString: process.env.REACT_APP_DATABASE_URL!,
   },
   verbose: true,
   strict: true,

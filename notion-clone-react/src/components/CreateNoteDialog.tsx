@@ -7,7 +7,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
-import { generateImagePrompt } from "../services/createNoteBook";
+import {
+  generateImage,
+  generateImagePrompt,
+} from "../services/generateImageWithAI";
+import { insertNote } from "../services/createNote";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -21,10 +25,18 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     //call the api to create a new note book
-    const imageDescription = generateImagePrompt(noteName);
+    const imageDescription: string =
+      (await generateImagePrompt(noteName)) || "empty slate";
+    const imageUrl = await generateImage(imageDescription);
     console.log(imageDescription);
+    console.log(imageUrl);
+    await insertNote({
+      name: noteName,
+      userId: "1",
+      imageUrl: imageUrl,
+    });
     setNoteName("");
     setOpen(false);
   };
@@ -36,13 +48,13 @@ export default function FormDialog() {
         onClick={handleClickOpen}
         startIcon={<AddIcon />}
         sx={{
-          border: '1px dashed',
-          color: 'green',
-          fontWeight: 'bold',
-          '&:hover': {
-            border: '1px dashed',
-            color: 'green',
-            fontWeight: 'bold',
+          border: "1px dashed",
+          color: "green",
+          fontWeight: "bold",
+          "&:hover": {
+            border: "1px dashed",
+            color: "green",
+            fontWeight: "bold",
           },
         }}
       >
