@@ -13,6 +13,7 @@ import {
   generateImagePrompt,
 } from "../services/generateImageWithAI";
 import { insertNote } from "../services/noteService";
+import { useAuth } from "@clerk/clerk-react";
 
 interface FormDialogProps {
   onNoteCreated: () => void;
@@ -31,6 +32,8 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
     setOpen(false);
   };
 
+  const { userId } = useAuth();
+  
   const handleCreate = async () => {
     setLoading(true); // start loading
     //call the api to create a new note book
@@ -41,7 +44,7 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
     console.log(imageUrl);
     await insertNote({
       name: noteName,
-      userId: "1",
+      userId: userId?.toString() || "",
       imageUrl: imageUrl,
     });
     setNoteName("");
@@ -91,7 +94,12 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" color="success" onClick={handleCreate} disabled={loading}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleCreate}
+            disabled={loading}
+          >
             Create
             {loading && <CircularProgress size={24} />}
           </Button>
