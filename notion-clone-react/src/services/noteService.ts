@@ -16,3 +16,6 @@ export const getNotes = async (userId: string) =>
     .from(notes)
     .where(eq(notes.userId, userId))
     .orderBy(notes.name);
+
+export const deleteNote = async (noteId: number) =>
+  await db.delete(notes).where(eq(notes.id, noteId));

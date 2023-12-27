@@ -7,6 +7,7 @@ import { NoteType } from "../db/schema";
 import { getNotes } from "../services/noteService";
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function DashboardPage() {
   const { userId } = useAuth();
@@ -67,7 +68,11 @@ export default function DashboardPage() {
             {notes.map((note) => {
               const createdAt = note.createdAt || new Date(0);
               return (
-                <a href={`/notebook/${note.id}`} key={note.id}>
+                <Link
+                  component={RouterLink}
+                  to={`/notebook/${note.id}`}
+                  key={note.id}
+                >
                   <div className="border border-stone-300 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1 h-[400px]">
                     <img
                       width={400}
@@ -85,7 +90,7 @@ export default function DashboardPage() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               );
             })}
           </div>

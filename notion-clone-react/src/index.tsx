@@ -14,6 +14,7 @@ import SignInPage from "./routes/sign-in";
 import SignUpPage from "./routes/sign-up";
 import DashboardPage from "./routes/dashboard";
 import UserInfoPage from "./routes/user-info";
+import NotebookPage from "./routes/notebook";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/sign-in", element: <SignInPage /> },
       { path: "/sign-up", element: <SignUpPage /> },
       { path: "/user-info", element: <UserInfoPage /> },
+      { path: "/notebook/:noteId", element: <NotebookPage /> },
       {
         element: <DashboardLayout />,
         path: "dashboard",
