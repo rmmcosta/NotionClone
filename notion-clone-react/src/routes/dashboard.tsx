@@ -2,30 +2,23 @@ import { ArrowLeft } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
-import Note from "../models/note";
 import CreateNoteDialog from "../components/CreateNoteDialog";
+import { NoteType } from "../db/schema";
+import { getNotes } from "../services/noteService";
+import { useCallback, useEffect, useState } from "react";
 
 export default function DashboardPage() {
-  const notes: Array<Note> = [
-    new Note(
-      "1",
-      "Note 1",
-      "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=164&h=164&fit=crop&auto=format",
-      new Date()
-    ),
-    new Note(
-      "2",
-      "Note 2",
-      "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?w=164&h=164&fit=crop&auto=format",
-      new Date()
-    ),
-    new Note(
-      "3",
-      "Note 3",
-      "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1?w=164&h=164&fit=crop&auto=format",
-      new Date()
-    ),
-  ];
+  const [notes, setNotes] = useState<Array<NoteType>>([]);
+
+  const fetchNotes = useCallback(async () => {
+    const fetchedNotes = await getNotes();
+    setNotes(fetchedNotes);
+  }, []);
+
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
+
   return (
     <>
       <div className="grainy min-h-screen">
@@ -68,8 +61,9 @@ export default function DashboardPage() {
 
           {/* display all the notes */}
           <div className="grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-3">
-            <CreateNoteDialog />
+            <CreateNoteDialog onNoteCreated={fetchNotes} />
             {notes.map((note) => {
+              const createdAt = note.createdAt || new Date(0);
               return (
                 <a href={`/notebook/${note.id}`} key={note.id}>
                   <div className="border border-stone-300 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1">
@@ -85,7 +79,7 @@ export default function DashboardPage() {
                       </h3>
                       <div className="h-1"></div>
                       <p className="text-sm text-gray-500">
-                        {new Date(note.createdAt).toLocaleDateString()}
+                        {createdAt.toLocaleDateString()}
                       </p>
                     </div>
                   </div>

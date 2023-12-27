@@ -2,7 +2,7 @@ import {
   pgTable,
   serial,
   text,
-  time,
+  timestamp,
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -13,7 +13,7 @@ export const notes = pgTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 512 }).notNull(),
     imageUrl: text("imageUrl"),
-    createdAt: time("createdAt").defaultNow(),
+    createdAt: timestamp("createdAt").defaultNow(),
     userId: varchar("userId", { length: 256 }).notNull(),
     editorState: text("editorState"),
   },

@@ -11,9 +11,13 @@ import {
   generateImage,
   generateImagePrompt,
 } from "../services/generateImageWithAI";
-import { insertNote } from "../services/createNote";
+import { insertNote } from "../services/noteService";
 
-export default function FormDialog() {
+interface FormDialogProps {
+  onNoteCreated: () => void;
+}
+
+export default function FormDialog({ onNoteCreated }: FormDialogProps) {
   const [open, setOpen] = React.useState(false);
   const [noteName, setNoteName] = React.useState("");
 
@@ -39,6 +43,7 @@ export default function FormDialog() {
     });
     setNoteName("");
     setOpen(false);
+    onNoteCreated();
   };
 
   return (

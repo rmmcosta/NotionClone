@@ -8,3 +8,5 @@ export const insertNote = async (note: NoteType) => {
     console.error(error);
   }
 };
+
+export const getNotes = async () => await db.select().from(notes);
