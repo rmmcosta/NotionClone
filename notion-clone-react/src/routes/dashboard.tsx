@@ -68,7 +68,7 @@ export default function DashboardPage() {
               const createdAt = note.createdAt || new Date(0);
               return (
                 <a href={`/notebook/${note.id}`} key={note.id}>
-                  <div className="border border-stone-300 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1">
+                  <div className="border border-stone-300 rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition hover:-translate-y-1 h-[400px]">
                     <img
                       width={400}
                       height={200}
