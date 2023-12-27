@@ -6,6 +6,7 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm/sql";
 
 export const notes = pgTable(
   "notes",
@@ -13,7 +14,11 @@ export const notes = pgTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 512 }).notNull(),
     imageUrl: text("imageUrl"),
-    createdAt: timestamp("createdAt").defaultNow(),
+    createdAt: timestamp("createdAt", {
+      precision: 6,
+      withTimezone: true,
+      mode: "date",
+    }).defaultNow(),
     userId: varchar("userId", { length: 256 }).notNull(),
     editorState: text("editorState"),
   },

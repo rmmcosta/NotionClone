@@ -79,7 +79,7 @@ export default function DashboardPage() {
                       </h3>
                       <div className="h-1"></div>
                       <p className="text-sm text-gray-500">
-                        {createdAt.toLocaleDateString()}
+                        {createdAt.toLocaleString()}
                       </p>
                     </div>
                   </div>
