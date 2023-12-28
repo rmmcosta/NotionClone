@@ -1,7 +1,7 @@
 import TypewriterTitle from "@/components/ui/TypewriterTitle";
 import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
-import { ArrowRight, Link } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -25,9 +25,6 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </div>
-      <div className="h-screen">
-        <UserButton afterSignOutUrl="/" />
       </div>
     </div>
   );

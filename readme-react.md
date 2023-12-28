@@ -50,3 +50,7 @@ Steps of creation and libraries instalation:
 
 14 - npm install axios
 15 - npm install --save openai
+
+16 - npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+
+17 - create a backend node app to serve the api/completion
