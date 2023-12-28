@@ -7,6 +7,7 @@ import { eq, and } from "drizzle-orm";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import DeleteButton from "../components/DeleteButton";
+import NotebookEditor from "./notebook-editor";
 
 const NotebookPage = () => {
   const { noteId } = useParams<{ noteId: string }>();
@@ -59,7 +60,9 @@ const NotebookPage = () => {
         </div>
 
         <div className="h-4"></div>
-        <div className="border-stone-200 shadow-xl border rounded-lg px-16 py-8 w-full"></div>
+        <div className="border-stone-200 shadow-xl border rounded-lg px-16 py-8 w-full">
+          <NotebookEditor note={note} />
+        </div>
       </div>
     </div>
   );

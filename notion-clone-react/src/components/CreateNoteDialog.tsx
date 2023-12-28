@@ -11,7 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import {
   generateImage,
   generateImagePrompt,
-} from "../services/generateImageWithAI";
+} from "../services/openai";
 import { insertNote } from "../services/noteService";
 import { useAuth } from "@clerk/clerk-react";
 
@@ -33,7 +33,7 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
   };
 
   const { userId } = useAuth();
-  
+
   const handleCreate = async () => {
     setLoading(true); // start loading
     //call the api to create a new note book

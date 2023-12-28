@@ -10,6 +10,17 @@ export const insertNote = async (note: NoteType) => {
   }
 };
 
+export const saveNote = async (note: NoteType) => {
+  try {
+    return db
+      .update(notes)
+      .set(note)
+      .where(eq(notes.id, note.id || 0));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getNotes = async (userId: string) =>
   await db
     .select()
