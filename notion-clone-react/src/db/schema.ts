@@ -12,14 +12,14 @@ export const notes = pgTable(
   {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 512 }).notNull(),
-    imageUrl: text("imageUrl"),
-    createdAt: timestamp("createdAt", {
+    imageUrl: text("image_url"),
+    createdAt: timestamp("created_at", {
       precision: 6,
       withTimezone: true,
       mode: "date",
     }).defaultNow(),
-    userId: varchar("userId", { length: 256 }).notNull(),
-    editorState: text("editorState"),
+    userId: varchar("user_id", { length: 256 }).notNull(),
+    editorState: text("editor_state"),
   },
   (notes) => {
     return {
