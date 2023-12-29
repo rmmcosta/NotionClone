@@ -1,4 +1,5 @@
 const express = require("express");
+const fetch = require('node-fetch');
 const cors = require("cors");
 const OpenAI = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
@@ -36,6 +37,14 @@ app.post("/api/completion", async (req, res) => {
   });
   console.log("response: ", response);
   res.json(response.choices[0].message.content);
+});
+
+app.get('/api/fetch-image', async (req, res) => {
+  const imageUrl = req.query.url;
+  console.log("imageUrl: ", imageUrl);
+  const response = await fetch(imageUrl);
+  const buffer = await response.buffer();
+  res.send(buffer);
 });
 
 app.listen(3002, () => {

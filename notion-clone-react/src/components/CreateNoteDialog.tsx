@@ -8,12 +8,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-  generateImage,
-  generateImagePrompt,
-} from "../services/openai";
+import { generateImage, generateImagePrompt } from "../services/openai";
 import { insertNote } from "../services/noteService";
 import { useAuth } from "@clerk/clerk-react";
+import { uploadFileToFirebase } from "../services/firebase";
 
 interface FormDialogProps {
   onNoteCreated: () => void;
@@ -39,13 +37,18 @@ export default function FormDialog({ onNoteCreated }: FormDialogProps) {
     //call the api to create a new note book
     const imageDescription: string =
       (await generateImagePrompt(noteName)) || "empty slate";
-    const imageUrl = await generateImage(imageDescription);
+    const generatedImageUrl = await generateImage(imageDescription);
     console.log(imageDescription);
-    console.log(imageUrl);
+    console.log(generatedImageUrl);
+    if (!generatedImageUrl) return;
+    const storedImageUrl = await uploadFileToFirebase(
+      generatedImageUrl,
+      noteName
+    );
     await insertNote({
       name: noteName,
       userId: userId?.toString() || "",
-      imageUrl: imageUrl,
+      imageUrl: storedImageUrl,
     });
     setNoteName("");
     setOpen(false);
