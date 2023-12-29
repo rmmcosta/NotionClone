@@ -6,7 +6,7 @@ dotenv.config({
 });
 
 export default defineConfig({
-  schema: "./db/schema.ts",
+  schema: "./src/db/schema.ts",
   driver: "pg",
   dbCredentials: {
     connectionString: process.env.REACT_APP_DATABASE_URL!,
