@@ -41,3 +41,22 @@ Steps of creation and libraries instalation:
 8 - npm i typewriter-effect
 
 9 - npm i openai-edge
+
+10 - npm i drizzle-orm @neondatabase/serverless
+11 - npm i -D drizzle-kit
+
+(to run migrations: npx drizzle-kit push:pg)
+
+12 - npm i pg
+13 - npx drizzle-kit studio
+
+14 - npm install axios
+15 - npm install --save openai
+
+16 - npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+
+17 - create a backend node app to serve the api/completion
+
+18 - npm i firebase
+
+19 - npm install -D @tailwindcss/typography

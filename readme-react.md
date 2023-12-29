@@ -54,3 +54,7 @@ Steps of creation and libraries instalation:
 16 - npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
 
 17 - create a backend node app to serve the api/completion
+
+18 - npm i firebase
+
+19 - npm install -D @tailwindcss/typography

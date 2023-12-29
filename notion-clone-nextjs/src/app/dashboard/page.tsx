@@ -62,6 +62,7 @@ const DashboardPage = async (props: Props) => {
                       height={200}
                       alt={note.name}
                       src={note.imageUrl || ""}
+                      priority
                     />
                     <div className="p-4">
                       <h3 className="text-xl font-semibold text-gray-900">
