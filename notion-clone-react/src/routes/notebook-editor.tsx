@@ -5,10 +5,12 @@ import { StarterKit } from "@tiptap/starter-kit";
 import Text from "@tiptap/extension-text";
 import { NoteType } from "../db/schema";
 import { useCompletion } from "ai/react";
-import Button from "@mui/material/Button";
 import NotebookEditorMenuBar from "./notebook-editor-menu-bar";
 import { useDebounce } from "../components/useDebounce";
 import { saveNote } from "../services/noteService";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 type Props = { note: NoteType };
 
@@ -47,7 +49,7 @@ const NotebookEditor = ({ note }: Props) => {
   const lastCompletion = React.useRef("");
 
   React.useEffect(() => {
-    console.log("completion: ",completion);
+    console.log("completion: ", completion);
     if (!completion || !editor) return;
     const diff = completion.slice(lastCompletion.current.length);
     lastCompletion.current = completion;
@@ -55,21 +57,31 @@ const NotebookEditor = ({ note }: Props) => {
   }, [completion, editor]);
 
   const debouncedEditorState = useDebounce(editorState, 500);
+
   React.useEffect(() => {
-    // save to db
-    setIsLoading(true);
-    if (debouncedEditorState === "") return;
-    note.editorState = debouncedEditorState;
-    saveNote(note);
-    setIsLoading(false);
+    const saveNoteToDB = async () => {
+      setIsLoading(true);
+      if (debouncedEditorState === "") return;
+      note.editorState = debouncedEditorState;
+      await saveNote(note);
+      setIsLoading(false);
+    };
+    saveNoteToDB();
   }, [debouncedEditorState, note]);
+
   return (
     <>
       <div className="flex">
         {editor && <NotebookEditorMenuBar editor={editor} />}
-        <Button disabled variant="outlined">
-          {isLoading ? "Saving..." : "Saved"}
-        </Button>
+        <Box ml={2} width={100}>
+          {isLoading ? (
+            <CircularProgress size={24} />
+          ) : (
+            <Typography variant="subtitle1" color="textSecondary">
+              Saved
+            </Typography>
+          )}
+        </Box>
       </div>
 
       <div className="prose prose-sm w-full mt-4">
