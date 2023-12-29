@@ -8,6 +8,7 @@ import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import DeleteButton from "../components/DeleteButton";
 import NotebookEditor from "./notebook-editor";
+import { ArrowLeft } from "@mui/icons-material";
 
 const NotebookPage = () => {
   const { noteId } = useParams<{ noteId: string }>();
@@ -44,7 +45,18 @@ const NotebookPage = () => {
       <div className="max-w-4xl mx-auto">
         <div className="border shadow-xl border-stone-200 rounded-lg p-4 flex items-center">
           <Link href="/dashboard">
-            <Button className="bg-green-600" size="small">
+            <Button
+              size="small"
+              sx={{
+                color: "green",
+                fontWeight: "bold",
+                "&:hover": {
+                  color: "green",
+                  fontWeight: "bold",
+                },
+              }}
+            >
+              <ArrowLeft className="mr-1 w-4 h-4" />
               Back
             </Button>
           </Link>
