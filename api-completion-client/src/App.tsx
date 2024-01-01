@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 
 const App: React.FC = () => {
   const [data, setData] = useState<string>("");
-  const [chunks, setChunks] = useState<string[]>([]);
+  const [prompt, setPrompt] = useState<string>("");
+  const [debouncedPrompt, setDebouncedPrompt] = useState<string>("");
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedPrompt(prompt);
+    }, 500);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [prompt]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +24,7 @@ const App: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ prompt: "cats" }),
+          body: JSON.stringify({ prompt: debouncedPrompt }),
         }
       );
 
@@ -37,22 +48,24 @@ const App: React.FC = () => {
         }
 
         const chunk = decoder.decode(value);
-        console.log(chunk);
-        setChunks((prevChunks) => {
-          const newChunks = [...prevChunks, chunk];
-          setData(newChunks.join(""));
-          return newChunks;
-        });
+        setData(prevData => prevData + chunk);
         return reader.read().then(processText);
       });
     };
 
-    fetchData();
-  }, [chunks]);
+    if (debouncedPrompt) {
+      fetchData();
+    }
+  }, [debouncedPrompt]);
 
   return (
     <div>
       <h1>API Data:</h1>
+      <input
+        type="text"
+        value={prompt}
+        onChange={e => setPrompt(e.target.value)}
+      />
       <p>{data}</p>
     </div>
   );
